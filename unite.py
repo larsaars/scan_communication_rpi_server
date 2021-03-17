@@ -1,8 +1,13 @@
+"""
+convert jpgs to pdfs and compose one single pdf in the end
+then clear pre folder
+"""
+
 from PIL import Image
 import os
 from PyPDF2 import PdfFileMerger
-from datetime import datetime
 import subprocess
+import utils
 
 # variables
 directory = 'pre'
@@ -26,8 +31,7 @@ for file in os.listdir(directory):
 
 if has_files:
     # merge and write
-    stamp = datetime.now().strftime('%m%d%Y_%H%M%S')
-    merger.write('final/' + stamp + '.pdf')
+    merger.write('final/' + utils.stamp() + '.pdf')
     merger.close()
 
     # delete the preprocessed files
