@@ -59,7 +59,6 @@ a4side = image.width - 48
 a4top = math.sqrt(2) * a4side
 # crop with pillow
 image.crop((0, 0, a4side, a4top)).save(remote_path)
-print(image.width, image.height)
 
 # inform user
 print('saved at ' + os.path.abspath(remote_path))

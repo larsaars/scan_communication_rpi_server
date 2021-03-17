@@ -5,13 +5,13 @@ then clear pre folder
 
 from PIL import Image
 import os
-from PyPDF2 import PdfFileMerger
 import subprocess
 import utils
+from fpdf import FPDF
 
 # variables
 directory = 'pre'
-merger = PdfFileMerger()
+merger = FPDF()
 has_files = False
 
 # loop through all jpgs
@@ -25,13 +25,14 @@ for file in os.listdir(directory):
     # read and convert jpg to pdf
     Image.open(og_path).convert('RGB').save(save_path)
     # add to merger
-    merger.append(save_path)
+    merger.add_page()
+    merger.image(save_path, 0, 0, 210, 297)
     # delete og jpg file
     os.remove(og_path)
 
 if has_files:
     # merge and write
-    merger.write('final/' + utils.stamp() + '.pdf')
+    merger.output('final/' + utils.stamp() + '.pdf', 'F')
     merger.close()
 
     # delete the preprocessed files
