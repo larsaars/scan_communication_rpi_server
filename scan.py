@@ -12,7 +12,11 @@ import math
 # final variables
 server = 'raspberrypi'
 username = 'pi'
-password = '27052002'
+password: str
+
+# read password from file
+with open('password.txt', 'r') as file:
+    password = file.readline().strip()
 
 # define scan command and host file
 host_filename = utils.stamp() + '.jpg'
